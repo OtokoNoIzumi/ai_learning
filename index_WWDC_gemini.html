@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI创作新模式体验 - 课程大纲</title>
+    <meta name="description" content="AI Copilot创作体验 + 计算机思维入门 + 实际项目产出的完整课程大纲">
+
+    <!-- Google Fonts: Manrope -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <!-- TailwindCSS 3.0+ CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome 5.11.2 -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
+    <!-- Apache ECharts 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></script>
+
+    <style>
+        /* --- Base Styles & Theme --- */
+        :root {
+            --apple-gradient: linear-gradient(135deg, #22D3EE 0%, #A541FF 100%);
+            --apple-gradient-alt: linear-gradient(135deg, #A541FF 0%, #FF54A2 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Manrope', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: #000;
+            color: #fff;
+            background-image: url('Comfy-UI-Output-4-1.png');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: var(--apple-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-text-alt {
+            background: var(--apple-gradient-alt);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Liquid Glass Card Styles --- */
+        .liquidGlass-wrapper {
+            position: relative;
+            display: flex;
+            overflow: hidden;
+            padding: 0.6rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.5);
+            height: 100%;
+        }
+
+        .liquidGlass-wrapper:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .liquidGlass-effect {
+            position: absolute;
+            z-index: 0;
+            inset: 0;
+            backdrop-filter: blur(8px); /* Increased blur for better effect */
+            filter: url(#glass-distortion);
+        }
+
+        .liquidGlass-tint {
+            position: absolute;
+            z-index: 1;
+            inset: 0;
+            background: rgba(20, 20, 25, 0.4); /* Darker tint for better contrast */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: inherit; /* inherit from wrapper */
+        }
+
+        .liquidGlass-shine {
+            position: absolute;
+            z-index: 2;
+            inset: 0;
+            border-radius: inherit; /* inherit from wrapper */
+            box-shadow: inset 2px 2px 1px 0 rgba(255, 255, 255, 0.1), inset -1px -1px 1px 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .liquidGlass-content {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            padding: 1.5rem;
+        }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.2);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- SVG Filter for Glass Effect -->
+    <svg style="display: none">
+        <filter id="glass-distortion">
+            <feTurbulence type="fractalNoise" baseFrequency="0.01 0.01" numOctaves="1" seed="5"/>
+            <feGaussianBlur stdDeviation="3" result="softMap"/>
+            <feDisplacementMap in="SourceGraphic" in2="softMap" scale="50" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+    </svg>
+
+    <!-- Main Container -->
+    <main class="w-full min-h-screen p-4 sm:p-6 md:p-8">
+        <div class="max-w-screen-2xl mx-auto">
+
+            <!-- Bento Grid Layout -->
+            <div class="grid grid-cols-12 gap-6 auto-rows-[minmax(100px,_auto)]">
+
+                <!-- Hero Section -->
+                <div class="col-span-12 md:col-span-7">
+                    <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div>
+                        <div class="liquidGlass-tint"></div>
+                        <div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content flex flex-col justify-center">
+                            <p class="font-bold gradient-text text-lg">AI NATIVE / NEW EXPERIENCE</p>
+                            <h1 class="text-5xl md:text-7xl font-extrabold my-4 tracking-tighter">AI创作新模式体验</h1>
+                            <p class="text-2xl md:text-3xl font-bold text-white/80">课程大纲</p>
+                            <p class="mt-6 text-white/60 text-lg leading-relaxed">
+                                AI Copilot创作体验 + 计算机思维入门 + 实际项目产出<br>
+                                从理论到实践，体验AI辅助创作的完整流程
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation / Key Links -->
+                <div class="col-span-12 md:col-span-5">
+                     <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div>
+                        <div class="liquidGlass-tint"></div>
+                        <div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content flex flex-col justify-between">
+                            <h2 class="text-3xl font-bold">NAVIGATION</h2>
+                            <div class="grid grid-cols-2 gap-4 mt-4 text-lg">
+                                <a href="#overview" class="hover:text-cyan-300 transition-colors"><i class="fas fa-eye fa-fw mr-2 opacity-50"></i>概览</a>
+                                <a href="#preparation" class="hover:text-cyan-300 transition-colors"><i class="fas fa-cog fa-fw mr-2 opacity-50"></i>准备</a>
+                                <a href="#concepts" class="hover:text-cyan-300 transition-colors"><i class="fas fa-lightbulb fa-fw mr-2 opacity-50"></i>概念</a>
+                                <a href="#practice" class="hover:text-cyan-300 transition-colors"><i class="fas fa-brain fa-fw mr-2 opacity-50"></i>思维</a>
+                                <a href="#project" class="hover:text-cyan-300 transition-colors"><i class="fas fa-code fa-fw mr-2 opacity-50"></i>项目</a>
+                                <a href="#resources" class="hover:text-cyan-300 transition-colors"><i class="fas fa-box-open fa-fw mr-2 opacity-50"></i>拓展</a>
+                                <a href="index.html" class="hover:text-cyan-300 transition-colors"><i class="fas fa-columns fa-fw mr-2 opacity-50"></i>切换风格</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Overview Section -->
+                <div id="overview" class="col-span-12"><h2 class="text-4xl font-bold my-4 pl-4 gradient-text-alt">分享内容概览 / OVERVIEW</h2></div>
+
+                <div class="col-span-12 md:col-span-6 lg:col-span-3">
+                    <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <span class="text-8xl font-extrabold gradient-text opacity-50">01</span>
+                            <h3 class="text-2xl font-bold mt-2">环境配置</h3>
+                            <p class="text-white/60 mt-2">技术环境检查、Git与GitHub配置，以及上次课程成果验收。</p>
+                            <p class="text-sm font-bold text-white/40 mt-2">PREPARATION</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 md:col-span-6 lg:col-span-3">
+                    <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <span class="text-8xl font-extrabold gradient-text opacity-50">02</span>
+                            <h3 class="text-2xl font-bold mt-2">AI Copilot核心概念</h3>
+                            <p class="text-white/70 mt-2">AI增强人的思考带宽，实现更高质量的沟通和思维</p>
+                            <p class="text-sm font-bold text-white/40 mt-2">CORE CONCEPTS</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 md:col-span-6 lg:col-span-3">
+                    <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <span class="text-8xl font-extrabold gradient-text opacity-50">03</span>
+                            <h3 class="text-2xl font-bold mt-2">计算机思维</h3>
+                            <p class="text-white/60 mt-2">为非技术背景者补充强大的问题解决思维框架。</p>
+                            <p class="text-sm font-bold text-white/40 mt-2">COMPUTATIONAL THINKING</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 md:col-span-6 lg:col-span-3">
+                    <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <span class="text-8xl font-extrabold gradient-text opacity-50">04</span>
+                            <h3 class="text-2xl font-bold mt-2">实际项目创作</h3>
+                            <p class="text-white/60 mt-2">无需编程环境，基于Web工具和AI辅助创作专业网站。</p>
+                            <p class="text-sm font-bold text-white/40 mt-2">PROJECT</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preparation Section -->
+                <div id="preparation" class="col-span-12"><h2 class="text-4xl font-bold my-4 pl-4 gradient-text-alt">课前准备 / PREPARATION</h2></div>
+
+                <div class="col-span-12 md:col-span-6 lg:col-span-4 md:row-span-2">
+                    <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <h3 class="text-2xl font-bold"><i class="fab fa-git-alt mr-2"></i> Git配置验证</h3>
+                            <p class="text-white/60 mt-2 mb-4">确保您的开发环境已准备就绪。</p>
+                            <div class="bg-black/30 rounded-lg p-4 font-mono text-sm">
+                                <p class="text-cyan-300">> git config --global user.name "你的用户名"</p>
+                                <p class="text-cyan-300">> git config --global user.email "你的邮箱"</p>
+                            </div>
+                            <p class="text-white/60 mt-4 mb-2 text-sm">配置文件参考 (<code class="text-white/80">.gitconfig</code>):</p>
+                            <div class="bg-black/30 rounded-lg p-4 font-mono text-sm text-fuchsia-300 overflow-x-auto">
+                                <pre>[http]
+    proxy = http://127.0.0.1:1023
+[user]
+    name = 你的用户名
+    email = 你的邮箱
+[https]
+    proxy = https://127.0.0.1:1023</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                    <div class="liquidGlass-wrapper">
+                         <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <h3 class="text-2xl font-bold"><i class="fas fa-clipboard-check mr-2"></i> 上次课程验收</h3>
+                            <p class="text-sm font-bold text-white/40 mt-1">HOMEWORK REVIEW</p>
+                            <ul class="space-y-3 mt-4 text-white/80 list-disc list-inside">
+                                <li>Coze智能体作业检查</li>
+                                <li>体验优化后的客服Bot</li>
+                                <li>豆包发布情况</li>
+                                <li>实际工作中的应用案例讨论</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                     <div class="liquidGlass-wrapper">
+                         <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <h3 class="text-2xl font-bold"><i class="fas fa-exclamation-triangle mr-2"></i> 重要提醒</h3>
+                             <p class="text-sm font-bold text-white/40 mt-1">IMPORTANT</p>
+                            <p class="text-white/80 mt-4 text-lg">确保网络环境稳定，可正常访问GitHub、Cursor等国际平台。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-span-12 md:col-span-6 lg:col-span-8">
+                     <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <h3 class="text-2xl font-bold"><i class="fas fa-check-circle mr-2"></i> 准备完成检查清单</h3>
+                            <p class="text-sm font-bold text-white/40 mt-1">CHECKLIST</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 mt-4 text-white/80">
+                                <label class="flex items-center"><input type="checkbox" class="mr-3 rounded accent-cyan-400">GitHub账号注册验证</label>
+                                <label class="flex items-center"><input type="checkbox" class="mr-3 rounded accent-cyan-400">Git客户端安装配置</label>
+                                <label class="flex items-center"><input type="checkbox" class="mr-3 rounded accent-cyan-400">网络环境测试</label>
+                                <label class="flex items-center"><input type="checkbox" class="mr-3 rounded accent-cyan-400">准备实操设备</label>
+                                <label class="flex items-center"><input type="checkbox" class="mr-3 rounded accent-cyan-400">完成上次作业验收</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Concepts Section -->
+                <div id="concepts" class="col-span-12"><h2 class="text-4xl font-bold my-4 pl-4 gradient-text-alt">核心概念 / CONCEPTS</h2></div>
+
+                <div class="col-span-12 md:col-span-7">
+                     <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <h3 class="text-2xl font-bold mb-4">核心理念转变</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-black/20 p-4 rounded-xl border border-red-500/50">
+                                    <h4 class="font-bold text-red-400"><i class="fas fa-times-circle mr-2"></i>传统理解</h4>
+                                    <p class="text-white/70 mt-2">AI让一切自动化，人变得更轻松</p>
+                                </div>
+                                <div class="bg-black/20 p-4 rounded-xl border border-green-500/50">
+                                    <h4 class="font-bold text-green-400"><i class="fas fa-check-circle mr-2"></i>真正价值</h4>
+                                    <p class="text-white/70 mt-2">AI增强人的思考带宽，实现更高质量的沟通和思维</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-span-12 md:col-span-5">
+                     <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content flex flex-col items-center justify-center text-center">
+                           <i class="fas fa-rocket text-7xl gradient-text"></i>
+                           <h3 class="text-2xl font-bold mt-4">媒介即讯息</h3>
+                           <p class="text-white/60 mt-2">优秀的媒介可以几何级提升思考质量和表达精度。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: Full-link collaboration -->
+                <div class="col-span-12 md:col-span-7">
+                    <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <h3 class="text-2xl font-bold mb-4"><i class="fas fa-link mr-2 opacity-50"></i>全链路开放协作模式</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="bg-black/20 p-4 rounded-xl">
+                                    <h4 class="font-bold text-lg text-cyan-300">超越工作流</h4>
+                                    <p class="text-white/70 mt-2 text-sm">每一步都可见、可理解、可调整</p>
+                                </div>
+                                <div class="bg-black/20 p-4 rounded-xl">
+                                    <h4 class="font-bold text-lg text-fuchsia-300">增强的思维对话</h4>
+                                    <p class="text-white/70 mt-2 text-sm">不是替代思考，而是让思考更深入、更全面</p>
+                                </div>
+                                <div class="bg-black/20 p-4 rounded-xl">
+                                    <h4 class="font-bold text-lg text-amber-300">媒介即讯息</h4>
+                                    <p class="text-white/70 mt-2 text-sm">优秀的媒介可以几何级提升思考质量</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: Why it's valuable -->
+                <div class="col-span-12 md:col-span-5">
+                    <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <h3 class="text-2xl font-bold mb-4"><i class="fas fa-gem mr-2 opacity-50"></i>为何更有价值?</h3>
+                            <ul class="space-y-3 text-white/80 list-disc list-inside">
+                                <li>保持主体性：人始终是主导</li>
+                                <li>敏捷高质量思考：拓展思维盲区</li>
+                                <li>提升工作完成度：超越重复执行</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: Cursor Hands-on -->
+                <div class="col-span-12">
+                    <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <h3 class="text-2xl font-bold mb-2"><i class="fas fa-code mr-2"></i>Cursor实操：5分钟从想法到网页</h3>
+                            <p class="text-sm font-bold text-white/40 mb-4">HANDS-ON EXPERIENCE</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <h4 class="font-bold text-lg text-cyan-300 mb-3">体验流程</h4>
+                                    <ol class="list-decimal list-inside space-y-2 text-white/80">
+                                        <li>认识基础提示词</li>
+                                        <li>修改个人信息</li>
+                                        <li>用特定内容生成网页</li>
+                                        <li>Copilot精细调整</li>
+                                        <li>内容发布到GitHub Pages</li>
+                                    </ol>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg text-fuchsia-300 mb-3">核心要点</h4>
+                                     <ul class="space-y-2 text-white/80 list-disc list-inside">
+                                        <li>表达带宽的重要性</li>
+                                        <li>问题解决能力培养</li>
+                                        <li>深层逻辑掌握</li>
+                                        <li>学习可行性验证</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Computer Thinking Section -->
+                <div id="practice" class="col-span-12"><h2 class="text-4xl font-bold my-4 pl-4 gradient-text-alt">计算机思维 / COMPUTATIONAL THINKING</h2></div>
+
+                 <div class="col-span-12 md:col-span-4">
+                     <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <h3 class="text-2xl font-bold"><i class="fas fa-cogs mr-2"></i> 指令化思维</h3>
+                            <p class="text-white/60 mt-2">学会用机器理解的方式表达复杂需求，驾驭自动化工具。</p>
+                            <div class="grid grid-cols-2 gap-4 mt-4 text-center">
+                                <div class="bg-black/20 p-3 rounded-lg"><i class="fas fa-robot mr-2 opacity-50"></i>自动化</div>
+                                <div class="bg-black/20 p-3 rounded-lg"><i class="fas fa-code-branch mr-2 opacity-50"></i>条件判断</div>
+                                <div class="bg-black/20 p-3 rounded-lg"><i class="fas fa-sync-alt mr-2 opacity-50"></i>循环迭代</div>
+                                <div class="bg-black/20 p-3 rounded-lg"><i class="fas fa-layer-group mr-2 opacity-50"></i>封装模块</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 md:col-span-8">
+                     <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                             <h3 class="text-2xl font-bold mb-2">未来工作的双重模式</h3>
+                             <p class="text-sm font-bold text-white/40 mb-4">THE FUTURE OF WORK</p>
+                             <div id="echarts-work-mode" style="width: 100%; height: 250px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: Three Core Thinking Tools -->
+                <div class="col-span-12">
+                     <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <h3 class="text-2xl font-bold mb-4">三个核心思维工具</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="bg-black/20 p-4 rounded-xl">
+                                    <h4 class="font-bold text-cyan-300"><i class="fas fa-robot mr-2"></i>自我驱动 (Autonomy)</h4>
+                                    <p class="text-white/70 mt-2 text-sm">设计能自主运行的流程，建立可持续运转的机制。</p>
+                                </div>
+                                <div class="bg-black/20 p-4 rounded-xl">
+                                    <h4 class="font-bold text-fuchsia-300"><i class="fas fa-layer-group mr-2"></i>封装和分层</h4>
+                                    <p class="text-white/70 mt-2 text-sm">将复杂问题分解为可管理的模块，让事情变得可理解、可管理。</p>
+                                </div>
+                                <div class="bg-black/20 p-4 rounded-xl">
+                                    <h4 class="font-bold text-amber-300"><i class="fas fa-sync-alt mr-2"></i>枚举、迭代、条件</h4>
+                                    <p class="text-white/70 mt-2 text-sm">系统性地考虑所有可能性，通过重复优化来接近最佳解决方案。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Section -->
+                <div id="project" class="col-span-12"><h2 class="text-4xl font-bold my-4 pl-4 gradient-text-alt">实际项目创作 / PROJECT</h2></div>
+
+                <div class="col-span-12 md:col-span-7">
+                    <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <h3 class="text-2xl font-bold">项目：SVG二维码分享卡片</h3>
+                            <p class="text-white/70 mt-4">无需Python环境，我们将使用AI辅助，通过纯Web工具和SVG技术，创作专业、可缩放的矢量分享卡片。这是一个完美的练习，用以展示如何将计算机思维应用于实际创作中。</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                                <div>
+                                    <h4 class="font-bold text-cyan-300 mb-2">技术选择</h4>
+                                    <ul class="text-sm space-y-1 list-disc list-inside text-white/70">
+                                        <li>SVG 矢量格式</li>
+                                        <li>纯Web工具</li>
+                                        <li>AI辅助设计</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-fuchsia-300 mb-2">技术路径优势</h4>
+                                     <ul class="text-sm space-y-1 list-disc list-inside text-white/70">
+                                        <li>可视化代码编辑</li>
+                                        <li>AI友好，易于修改</li>
+                                        <li>跨平台兼容</li>
+                                     </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-span-12 md:col-span-5">
+                    <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <h3 class="text-2xl font-bold">实操流程</h3>
+                            <p class="text-sm font-bold text-white/40 mt-1">WORKFLOW</p>
+                            <ol class="space-y-3 mt-4 text-white/80">
+                                <li class="flex items-start"><span class="bg-white/20 rounded-full w-6 h-6 text-center leading-6 mr-3 font-bold text-sm flex-shrink-0">1</span><span>提出制作需求，AI生成框架</span></li>
+                                <li class="flex items-start"><span class="bg-white/20 rounded-full w-6 h-6 text-center leading-6 mr-3 font-bold text-sm flex-shrink-0">2</span><span>调整内容细节，精细化修改</span></li>
+                                <li class="flex items-start"><span class="bg-white/20 rounded-full w-6 h-6 text-center leading-6 mr-3 font-bold text-sm flex-shrink-0">3</span><span>整合二维码等非文字元素</span></li>
+                                <li class="flex items-start"><span class="bg-white/20 rounded-full w-6 h-6 text-center leading-6 mr-3 font-bold text-sm flex-shrink-0">4</span><span>保存输出，用于实际应用</span></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resources Section -->
+                <div id="resources" class="col-span-12"><h2 class="text-4xl font-bold my-4 pl-4 gradient-text-alt">应用拓展 / RESOURCES</h2></div>
+
+                <div class="col-span-12 md:col-span-6 lg:col-span-5">
+                    <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <h3 class="text-2xl font-bold">二维码生成工具</h3>
+                            <p class="text-sm font-bold text-white/40 mt-1">SVG QR CODE GENERATORS</p>
+                             <ul class="space-y-3 mt-4 text-white/80">
+                                <li><a href="https://qrplanet.com/qr-code-generator-svg" target="_blank" class="hover:text-cyan-300 transition-colors">» QR Planet <span class="text-xs opacity-50">(专业SVG)</span></a></li>
+                                <li><a href="https://aquiestoy.io/qr-code-generator/svg" target="_blank" class="hover:text-cyan-300 transition-colors">» Aquiestoy <span class="text-xs opacity-50">(自定义样式)</span></a></li>
+                                <li><a href="https://www.tiaomama.com/qrcode-batch" target="_blank" class="hover:text-cyan-300 transition-colors">» 条妈妈 <span class="text-xs opacity-50">(国内批量)</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-span-12 md:col-span-6 lg:col-span-7">
+                    <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <h3 class="text-2xl font-bold">政务应用场景举例</h3>
+                            <p class="text-sm font-bold text-white/40 mt-1">GOVERNMENT USE CASES</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                <div>
+                                    <h4 class="font-bold text-lg text-cyan-300">宣传推广类</h4>
+                                    <ul class="text-sm space-y-1 mt-2 list-disc list-inside text-white/70">
+                                        <li>政策解读页面</li>
+                                        <li>活动宣传页</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg text-fuchsia-300">服务展示类</h4>
+                                    <ul class="text-sm space-y-1 mt-2 list-disc list-inside text-white/70">
+                                        <li>便民服务指南</li>
+                                        <li>部门职能展示</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: Deliverables -->
+                <div class="col-span-12">
+                    <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                             <h3 class="text-2xl font-bold mb-4">课程交付成果</h3>
+                             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                                <div class="bg-black/20 p-4 rounded-xl">
+                                    <i class="fas fa-file-code text-5xl text-cyan-300"></i>
+                                    <h4 class="font-bold text-lg mt-3">可用网站文件</h4>
+                                    <p class="text-white/60 text-sm mt-1">完整的HTML响应式页面</p>
+                                </div>
+                                <div class="bg-black/20 p-4 rounded-xl">
+                                    <i class="fas fa-qrcode text-5xl text-fuchsia-300"></i>
+                                    <h4 class="font-bold text-lg mt-3">SVG二维码卡片</h4>
+                                    <p class="text-white/60 text-sm mt-1">无限缩放的个性化矢量卡片</p>
+                                </div>
+                                <div class="bg-black/20 p-4 rounded-xl">
+                                    <i class="fas fa-toolbox text-5xl text-amber-300"></i>
+                                    <h4 class="font-bold text-lg mt-3">工作流模板</h4>
+                                    <p class="text-white/60 text-sm mt-1">AI协作提示词库与项目流程</p>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: Learning Path -->
+                <div class="col-span-12">
+                     <div class="liquidGlass-wrapper">
+                        <div class="liquidGlass-effect"></div><div class="liquidGlass-tint"></div><div class="liquidGlass-shine"></div>
+                        <div class="liquidGlass-content">
+                            <h3 class="text-2xl font-bold mb-4">持续学习路径</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-black/20 p-4 rounded-xl">
+                                    <h4 class="font-bold text-cyan-300"><i class="fas fa-puzzle-piece mr-2"></i>拓展应用领域</h4>
+                                    <ul class="text-white/70 mt-2 text-sm list-disc list-inside">
+                                        <li>内部培训材料制作</li>
+                                        <li>工作汇报演示文稿</li>
+                                        <li>数据可视化图表设计</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-black/20 p-4 rounded-xl">
+                                    <h4 class="font-bold text-fuchsia-300"><i class="fas fa-rocket mr-2"></i>建立工作流</h4>
+                                     <ul class="text-white/70 mt-2 text-sm list-disc list-inside">
+                                        <li>建立个人AI协作工作流</li>
+                                        <li>在团队中推广新工作方式</li>
+                                        <li>成为数字化转型推动者</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="col-span-12 mt-8 text-center text-white/50">
+                    <div class="flex justify-center items-center space-x-6">
+                        <a href="https://github.com/OtokoNoIzumi" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-github mr-1"></i> GitHub</a>
+                        <p>&copy; 2025 Izumi.屈源</p>
+                        <a href="https://space.bilibili.com/82205" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-bilibili mr-1"></i> Bilibili</a>
+                    </div>
+                    <p class="text-sm mt-2">AI创作新模式体验</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // ECharts Initialization: Future of Work
+            var chartDom = document.getElementById('echarts-work-mode');
+            if(chartDom) {
+                var myChart = echarts.init(chartDom);
+                var option = {
+                    tooltip: {
+                        trigger: 'item',
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        borderColor: '#555',
+                        textStyle: { color: '#fff' }
+                    },
+                    legend: {
+                        top: '5%',
+                        left: 'center',
+                        textStyle: { color: '#fff' }
+                    },
+                    series: [
+                        {
+                            name: '未来工作模式',
+                            type: 'pie',
+                            radius: ['40%', '70%'],
+                            avoidLabelOverlap: false,
+                            itemStyle: {
+                                borderRadius: 10,
+                                borderColor: 'rgba(0,0,0,0.5)',
+                                borderWidth: 2
+                            },
+                            label: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true,
+                                    fontSize: 24,
+                                    fontWeight: 'bold',
+                                    color: '#fff'
+                                }
+                            },
+                            labelLine: {
+                                show: false
+                            },
+                            data: [
+                                {
+                                    value: 65,
+                                    name: '编写和调优工作流',
+                                    itemStyle: {
+                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                            { offset: 0, color: '#22D3EE' },
+                                            { offset: 1, color: '#1B9CBB' }
+                                        ])
+                                    }
+                                },
+                                {
+                                    value: 35,
+                                    name: '高带宽创意和写作',
+                                    itemStyle: {
+                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                            { offset: 0, color: '#A541FF' },
+                                            { offset: 1, color: '#7C2AE8' }
+                                        ])
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                };
+                myChart.setOption(option);
+                 window.addEventListener('resize', myChart.resize);
+            }
+        });
+    </script>
+</body>
+</html>
