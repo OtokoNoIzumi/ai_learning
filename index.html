@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI创作新模式体验</title>
+    <meta name="description" content="AI Copilot创作体验 + 计算机思维入门 + 实际项目产出的完整课程大纲">
+
+    <!-- TailwindCSS 3.0+ CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Preline UI Components -->
+    <link rel="stylesheet" href="https://preline.co/assets/css/main.min.css">
+    <script defer src="https://preline.co/assets/js/hs-ui.bundle.js"></script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- 自定义样式 -->
+    <style>
+        /* 主题变量 */
+        :root {
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        }
+
+        /* 深色模式变量 */
+        .dark {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+        }
+
+        /* 浅色模式变量 */
+        .light {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+        }
+
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.3);
+            border-radius: 3px;
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.5);
+        }
+
+        /* Linear App 风格的微交互 */
+        .btn-primary {
+            background: var(--gradient-primary);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .card-hover:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 动画效果 */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 渐变文本 */
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 进度指示器 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            z-index: 100;
+            transition: width 0.1s ease;
+        }
+    </style>
+
+    <script>
+        // TailwindCSS 配置
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
+    <!-- 进度条 -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-500 rounded-lg flex items-center justify-center mr-3">
+                        <i class="fas fa-graduation-cap text-white text-sm"></i>
+                    </div>
+                    <h1 class="text-lg font-bold text-slate-900 dark:text-white">AI创作新模式体验</h1>
+                </div>
+
+                <!-- 导航菜单 -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#overview" class="nav-link text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-500 transition-colors">课程概览</a>
+                    <a href="#preparation" class="nav-link text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-500 transition-colors">环境准备</a>
+                    <a href="#concepts" class="nav-link text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-500 transition-colors">核心概念</a>
+                    <a href="#practice" class="nav-link text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-500 transition-colors">实操体验</a>
+                    <a href="#project" class="nav-link text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-500 transition-colors">项目创作</a>
+                    <a href="#resources" class="nav-link text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-500 transition-colors">学习资源</a>
+                </div>
+
+                <!-- 主题切换和菜单按钮 -->
+                <div class="flex items-center space-x-3">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                        <i class="fas fa-sun text-slate-600 dark:text-slate-400 dark:hidden"></i>
+                        <i class="fas fa-moon text-slate-400 hidden dark:block"></i>
+                    </button>
+
+                    <!-- 移动端菜单按钮 -->
+                    <button id="mobileMenuToggle" class="md:hidden p-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+                        <i class="fas fa-bars text-slate-600 dark:text-slate-400"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 移动端菜单 -->
+            <div id="mobileMenu" class="hidden md:hidden pb-4">
+                <div class="flex flex-col space-y-2">
+                    <a href="#overview" class="block py-2 text-sm font-medium text-slate-600 dark:text-slate-300">课程概览</a>
+                    <a href="#preparation" class="block py-2 text-sm font-medium text-slate-600 dark:text-slate-300">环境准备</a>
+                    <a href="#concepts" class="block py-2 text-sm font-medium text-slate-600 dark:text-slate-300">核心概念</a>
+                    <a href="#practice" class="block py-2 text-sm font-medium text-slate-600 dark:text-slate-300">实操体验</a>
+                    <a href="#project" class="block py-2 text-sm font-medium text-slate-600 dark:text-slate-300">项目创作</a>
+                    <a href="#resources" class="block py-2 text-sm font-medium text-slate-600 dark:text-slate-300">学习资源</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="pt-16">
+        <!-- 英雄区域 -->
+        <section class="relative bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-800 dark:to-slate-900 py-20 overflow-hidden">
+            <!-- 背景装饰 -->
+            <div class="absolute inset-0 opacity-30">
+                <div class="absolute top-10 left-10 w-72 h-72 bg-primary-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+                <div class="absolute top-40 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse" style="animation-delay: 1s;"></div>
+            </div>
+
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="fade-in">
+                    <div class="inline-flex items-center px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium mb-6">
+                        <i class="fas fa-rocket mr-2"></i>
+                        基于Cursor的进阶实操
+                    </div>
+
+                    <h1 class="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6">
+                        <span class="gradient-text">AI创作新模式体验</span>
+                        <br><br>课程大纲
+                    </h1>
+
+                    <p class="text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+                        AI Copilot创作体验 + 计算机思维入门 + 实际项目产出<br>
+                        从理论到实践，体验AI辅助创作的完整流程
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                        <a href="#overview" class="btn-primary px-8 py-3 rounded-lg text-white font-medium inline-flex items-center justify-center">
+                            <i class="fas fa-play mr-2"></i>
+                            开始了解
+                        </a>
+                        <a href="#project" class="px-8 py-3 rounded-lg border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors inline-flex items-center justify-center">
+                            <i class="fas fa-code mr-2"></i>
+                            查看项目
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 课程概览 -->
+        <section id="overview" class="py-20 bg-white dark:bg-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-4">分享内容概览</h2>
+                    <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-lg">五大模块，从理论到实践的完整学习路径</p>
+                </div>
+                <!-- 第一行：01和02 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="card-hover bg-slate-50 dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mr-6 flex-shrink-0">
+                                <span class="text-white font-bold text-lg">01</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">课前准备与环境配置</h3>
+                                <p class="text-slate-600 dark:text-slate-300 mb-4">技术环境检查、Git配置验证、GitHub账号配置，以及上次课程成果验收</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-hover bg-slate-50 dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center mr-6 flex-shrink-0">
+                                <span class="text-white font-bold text-lg">02</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">AI Copilot核心概念与实操体验</h3>
+                                <p class="text-slate-600 dark:text-slate-300 mb-4">不是"一键搞定"，而是"思考带宽增强"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第二行：03和04 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="card-hover bg-slate-50 dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center mr-6 flex-shrink-0">
+                                <span class="text-white font-bold text-lg">03</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">计算机思维 - 给非技术背景者的思维框架补充</h3>
+                                <p class="text-slate-600 dark:text-slate-300 mb-4">理解人类智慧结晶：不是为了学编程，而是掌握强大的问题解决思维框架</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-hover bg-slate-50 dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center mr-6 flex-shrink-0">
+                                <span class="text-white font-bold text-lg">04</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">实际项目创作 - SVG二维码分享卡片</h3>
+                                <p class="text-slate-600 dark:text-slate-300 mb-4">无需编程环境，基于Web工具和AI辅助创作专业网站</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 环境准备部分 -->
+        <section id="preparation" class="py-20 bg-slate-50 dark:bg-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-4">课前准备与环境配置</h2>
+                    <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-lg">确保技术环境就绪，验收上次课程成果</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- 技术环境检查 -->
+                    <div class="space-y-8">
+                        <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-cog text-blue-600 dark:text-blue-400 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">技术环境检查与配置</h3>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="bg-slate-50 dark:bg-slate-800 rounded-lg p-6">
+                                    <h4 class="font-semibold text-slate-900 dark:text-white mb-3">Git配置验证</h4>
+                                    <ul class="space-y-2 text-slate-600 dark:text-slate-300">
+                                        <li>• <strong>检查安装</strong>：<code class="bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded text-sm">git --version</code></li>
+                                        <li>• <strong>下载地址</strong>：<a href="https://git-scm.com/downloads" target="_blank" class="text-primary-500 hover:text-primary-600">git-scm.com/downloads</a></li>
+                                        <li>• <strong>配置用户信息</strong>：</li>
+                                    </ul>
+                                    <div class="bg-slate-800 rounded-lg p-4 mt-3 overflow-x-auto">
+                                        <pre class="text-green-400 text-sm"><code>
+git config --global user.name "你的用户名"
+git config --global user.email "你的邮箱"
+</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="bg-slate-50 dark:bg-slate-800 rounded-lg p-6">
+                                    <h4 class="font-semibold text-slate-900 dark:text-white mb-3">Git配置示例</h4>
+                                    <p class="text-slate-600 dark:text-slate-300 text-sm mb-3">参考配置文件位置：<code class="bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded text-sm">C:\Users\用户名\.gitconfig</code></p>
+                                    <div class="bg-slate-800 rounded-lg p-4 overflow-x-auto">
+                                        <pre class="text-green-400 text-sm"><code>
+[http]
+    sslVerify = true
+    proxy = http://127.0.0.1:1023
+[user]
+    name = 你的用户名
+    email = 你的邮箱@users.noreply.github.com
+[https]
+    proxy = https://127.0.0.1:1023
+[init]
+    defaultBranch = main
+</code></pre>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 上次课程验收 -->
+                    <div class="space-y-8">
+                        <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-clipboard-check text-green-600 dark:text-green-400 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">上次课程成果验收</h3>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="border-l-4 border-primary-500 pl-6">
+                                    <h4 class="font-semibold text-slate-900 dark:text-white mb-2">Coze智能体作业检查</h4>
+                                    <ul class="space-y-1 text-slate-600 dark:text-slate-300 text-sm">
+                                        <li>• 体验优化后的客服Bot</li>
+                                        <li>• 豆包发布</li>
+                                        <li>• 实际工作中的应用案例讨论</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 准备检查清单 -->
+                        <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-2xl p-6">
+                            <h4 class="font-bold text-green-800 dark:text-green-300 mb-4">
+                                <i class="fas fa-check-circle mr-2"></i>
+                                准备完成检查清单
+                            </h4>
+                            <div class="grid grid-cols-1 gap-2">
+                                <label class="flex items-center text-green-700 dark:text-green-400 text-sm">
+                                    <input type="checkbox" class="mr-3 rounded">
+                                    GitHub账号注册完成并验证邮箱
+                                </label>
+                                <label class="flex items-center text-green-700 dark:text-green-400 text-sm">
+                                    <input type="checkbox" class="mr-3 rounded">
+                                    Git客户端安装并配置用户信息
+                                </label>
+                                <label class="flex items-center text-green-700 dark:text-green-400 text-sm">
+                                    <input type="checkbox" class="mr-3 rounded">
+                                    测试网络环境可正常访问目标网站
+                                </label>
+                                <label class="flex items-center text-green-700 dark:text-green-400 text-sm">
+                                    <input type="checkbox" class="mr-3 rounded">
+                                    准备好参与实操的设备（笔记本电脑）
+                                </label>
+                                <label class="flex items-center text-green-700 dark:text-green-400 text-sm">
+                                    <input type="checkbox" class="mr-3 rounded">
+                                    完成上次课程的作业验收
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-lg p-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-amber-600 dark:text-amber-400 mr-3 mt-1"></i>
+                                <div>
+                                    <p class="font-medium text-amber-800 dark:text-amber-300 mb-1">重要提醒</p>
+                                    <p class="text-amber-700 dark:text-amber-400 text-sm">确保网络环境稳定（能访问GitHub、Cursor等国际平台）</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Copilot核心概念与实操体验 -->
+        <section id="concepts" class="py-20 bg-white dark:bg-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-4">AI Copilot核心概念与实操体验</h2>
+                    <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-lg">不是"一键搞定"，而是"思考带宽增强"</p>
+                </div>
+
+                <!-- 核心理念转变 -->
+                <div class="mb-16">
+                    <div class="bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 rounded-2xl p-8 border border-red-200 dark:border-red-700 mb-8">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fas fa-lightbulb text-red-600 dark:text-red-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">核心理念转变</h3>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- 传统理解 -->
+                            <div class="bg-white/60 dark:bg-slate-800/60 rounded-xl p-6 border border-red-200 dark:border-red-700">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-times-circle text-red-500 mr-3"></i>
+                                    <h4 class="font-bold text-red-700 dark:text-red-400">传统理解</h4>
+                                </div>
+                                <p class="text-slate-600 dark:text-slate-300">AI让一切自动化，人变得更轻松</p>
+                                <div class="mt-4 text-sm text-slate-500 dark:text-slate-400">
+                                    人 → 机器 → 结果（黑盒过程）
+                                </div>
+                            </div>
+
+                            <!-- 真正价值 -->
+                            <div class="bg-white/60 dark:bg-slate-800/60 rounded-xl p-6 border border-green-200 dark:border-green-700">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                    <h4 class="font-bold text-green-700 dark:text-green-400">真正价值</h4>
+                                </div>
+                                <p class="text-slate-600 dark:text-slate-300">AI增强人的思考带宽，实现更高质量的沟通和思维</p>
+                                <div class="mt-4 text-sm text-slate-500 dark:text-slate-400">
+                                    人 ↔ AI持续对话 ↔ 思维碰撞 ↔ 质量提升
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 全链路开放且可编辑的协作模式 -->
+                    <div class="bg-blue-50 dark:bg-blue-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-700">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6">
+                            <i class="fas fa-link text-blue-600 dark:text-blue-400 mr-3"></i>
+                            全链路开放且可编辑的协作模式
+                        </h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-white/60 dark:bg-slate-800/60 rounded-lg p-6 text-center">
+                                <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-eye text-blue-600 text-2xl"></i>
+                                </div>
+                                <h4 class="font-semibold text-slate-900 dark:text-white mb-2">超越工作流的弹性</h4>
+                                <p class="text-slate-600 dark:text-slate-300 text-sm">每一步都可见、可理解、可调整</p>
+                            </div>
+
+                            <div class="bg-white/60 dark:bg-slate-800/60 rounded-lg p-6 text-center">
+                                <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-comments text-blue-600 text-2xl"></i>
+                                </div>
+                                <h4 class="font-semibold text-slate-900 dark:text-white mb-2">增强的思维对话</h4>
+                                <p class="text-slate-600 dark:text-slate-300 text-sm">不是替代思考，而是让思考更深入、更全面</p>
+                            </div>
+
+                            <div class="bg-white/60 dark:bg-slate-800/60 rounded-lg p-6 text-center">
+                                <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-rocket text-blue-600 text-2xl"></i>
+                                </div>
+                                <h4 class="font-semibold text-slate-900 dark:text-white mb-2">媒介即讯息</h4>
+                                <p class="text-slate-600 dark:text-slate-300 text-sm">优秀的媒介可以几何级提升思考质量和表达精度</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 为什么这种模式更有价值 -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8 text-center">为什么这种模式更有价值？</h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="card-hover bg-slate-50 dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-primary-100 to-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-user-check text-primary-600 text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-3">保持主体性</h4>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">人始终是思考的主导者，AI是增强器而非替代者</p>
+                        </div>
+
+                        <div class="card-hover bg-slate-50 dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-teal-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-expand-arrows-alt text-green-600 text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-3">扩展认知边界</h4>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">AI帮助探索人类思维的盲区，发现新的可能性</p>
+                        </div>
+
+                        <div class="card-hover bg-slate-50 dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-red-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-bullseye text-orange-600 text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-3">提升表达精度</h4>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">在对话中不断精炼和优化想法的表达</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cursor实操演示 -->
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-2xl p-8 border border-purple-200 dark:border-purple-700">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-code text-purple-600 dark:text-purple-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Cursor实操演示：5分钟从想法到网页</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- 演示流程 -->
+                        <div>
+                            <h4 class="font-semibold text-slate-900 dark:text-white mb-4">演示流程</h4>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                        <span class="text-white font-bold text-sm">1</span>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-medium text-slate-900 dark:text-white">自然语言描述需求</h5>
+                                        <p class="text-slate-600 dark:text-slate-300 text-sm">创建个人或团队展示页面的初始想法</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                        <span class="text-white font-bold text-sm">2</span>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-medium text-slate-900 dark:text-white">Cursor AI实时代码生成</h5>
+                                        <p class="text-slate-600 dark:text-slate-300 text-sm">观察AI如何理解需求并生成代码</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                        <span class="text-white font-bold text-sm">3</span>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-medium text-slate-900 dark:text-white">即时预览和调整</h5>
+                                        <p class="text-slate-600 dark:text-slate-300 text-sm">实时查看效果，进行互动式优化</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                        <span class="text-white font-bold text-sm">4</span>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-medium text-slate-900 dark:text-white">样式优化和功能完善</h5>
+                                        <p class="text-slate-600 dark:text-slate-300 text-sm">在对话中持续改进和完善</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 体验要点 -->
+                        <div>
+                            <h4 class="font-semibold text-slate-900 dark:text-white mb-4">体验要点（重点观察思考带宽的变化）</h4>
+                            <div class="space-y-3">
+                                <div class="bg-white/60 dark:bg-slate-800/60 rounded-lg p-4">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-search text-purple-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <h5 class="font-medium text-slate-900 dark:text-white text-sm">观察思维过程的透明化</h5>
+                                            <p class="text-slate-600 dark:text-slate-300 text-xs">每一步AI的理解和建议都可见</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white/60 dark:bg-slate-800/60 rounded-lg p-4">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-chart-line text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <h5 class="font-medium text-slate-900 dark:text-white text-sm">体验思考质量的提升</h5>
+                                            <p class="text-slate-600 dark:text-slate-300 text-xs">在对话中想法如何被优化和完善</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white/60 dark:bg-slate-800/60 rounded-lg p-4">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-brain text-blue-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <h5 class="font-medium text-slate-900 dark:text-white text-sm">感受认知边界的扩展</h5>
+                                            <p class="text-slate-600 dark:text-slate-300 text-xs">AI如何帮助发现自己未曾考虑的方面</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white/60 dark:bg-slate-800/60 rounded-lg p-4">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-handshake text-orange-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <h5 class="font-medium text-slate-900 dark:text-white text-sm">理解协作的本质</h5>
+                                            <p class="text-slate-600 dark:text-slate-300 text-xs">不是AI代替思考，而是增强思考能力</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 计算机思维 - 给非技术背景者的思维框架补充 -->
+        <section id="practice" class="py-20 bg-slate-50 dark:bg-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-4">计算机思维 - 给非技术背景者的思维框架补充</h2>
+                    <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-lg">理解人类智慧结晶：不是为了学编程，而是掌握强大的问题解决思维框架</p>
+                </div>
+
+                <!-- 为什么要了解计算机思维 -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-700 mb-16">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-brain text-blue-600 dark:text-blue-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">为什么要了解计算机思维？</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white/60 dark:bg-slate-800/60 rounded-lg p-6 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-lightbulb text-blue-600 text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-900 dark:text-white mb-2">不是为了学编程</h4>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">而是理解一种强大的问题解决思维框架</p>
+                        </div>
+
+                        <div class="bg-white/60 dark:bg-slate-800/60 rounded-lg p-6 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-teal-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-gem text-green-600 text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-900 dark:text-white mb-2">人类智慧结晶</h4>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">几十年来最有效的复杂问题处理方法</p>
+                        </div>
+
+                        <div class="bg-white/60 dark:bg-slate-800/60 rounded-lg p-6 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-red-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-puzzle-piece text-orange-600 text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-900 dark:text-white mb-2">思维互补</h4>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">结构化 + 系统化 + 可复用化</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 三个核心思维工具 -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8 text-center">三个核心思维工具</h3>
+
+                    <div class="space-y-8">
+                        <!-- 自我驱动 -->
+                        <div class="card-hover bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                <div class="flex items-center lg:justify-center">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-primary-500 to-purple-500 rounded-2xl flex items-center justify-center mr-4 lg:mr-0">
+                                        <i class="fas fa-robot text-blue-600 text-2xl"></i>
+                                    </div>
+                                    <div class="lg:hidden">
+                                        <h4 class="text-xl font-bold text-slate-900 dark:text-white">自我驱动 (Autonomy)</h4>
+                                        <p class="text-slate-600 dark:text-slate-300 text-sm">系统能够自主完成任务</p>
+                                    </div>
+                                </div>
+
+                                <div class="lg:col-span-2">
+                                    <div class="hidden lg:block mb-4">
+                                        <h4 class="text-xl font-bold text-slate-900 dark:text-white">自我驱动 (Autonomy)</h4>
+                                        <p class="text-slate-600 dark:text-slate-300 mb-4">系统能够自主完成任务，无需人工干预每个细节</p>
+                                    </div>
+
+                                    <div class="space-y-3">
+                                        <div class="flex items-start">
+                                            <i class="fas fa-arrow-right text-primary-500 mr-3 mt-1"></i>
+                                            <div>
+                                                <h5 class="font-medium text-slate-900 dark:text-white">设计能够自主运行的流程</h5>
+                                                <p class="text-slate-600 dark:text-slate-300 text-sm">建立不依赖于持续监督的工作机制</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <i class="fas fa-arrow-right text-primary-500 mr-3 mt-1"></i>
+                                            <div>
+                                                <h5 class="font-medium text-slate-900 dark:text-white">培养下属/系统的独立工作能力</h5>
+                                                <p class="text-slate-600 dark:text-slate-300 text-sm">让团队成员能够独立判断和执行</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <i class="fas fa-arrow-right text-primary-500 mr-3 mt-1"></i>
+                                            <div>
+                                                <h5 class="font-medium text-slate-900 dark:text-white">建立可持续运转的机制</h5>
+                                                <p class="text-slate-600 dark:text-slate-300 text-sm">创造长期稳定的运行环境</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 封装和分层 -->
+                        <div class="card-hover bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                <div class="flex items-center lg:justify-center">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-teal-500 rounded-2xl flex items-center justify-center mr-4 lg:mr-0">
+                                        <i class="fas fa-layer-group text-amber-600 text-2xl"></i>
+                                    </div>
+                                    <div class="lg:hidden">
+                                        <h4 class="text-xl font-bold text-slate-900 dark:text-white">封装和分层</h4>
+                                        <p class="text-slate-600 dark:text-slate-300 text-sm">将复杂问题分解为可管理的模块</p>
+                                    </div>
+                                </div>
+
+                                <div class="lg:col-span-2">
+                                    <div class="hidden lg:block mb-4">
+                                        <h4 class="text-xl font-bold text-slate-900 dark:text-white">封装和分层 (Encapsulation & Layering)</h4>
+                                        <p class="text-slate-600 dark:text-slate-300 mb-4">将复杂问题分解为可管理的模块，层层递进</p>
+                                    </div>
+
+                                    <div class="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-lg p-4 mb-4">
+                                        <h5 class="font-medium text-amber-800 dark:text-amber-300 mb-2">
+                                            <i class="fas fa-quote-left mr-2"></i>
+                                            与传统智慧的呼应
+                                        </h5>
+                                        <div class="space-y-2 text-sm text-amber-700 dark:text-amber-400">
+                                            <p>• 类似中国古代"治大国如烹小鲜"的治理智慧</p>
+                                            <p>• 类似军事上的"分而治之"策略</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-slate-600 dark:text-slate-300 text-sm">
+                                        <strong>实际价值</strong>：让复杂的事情变得可理解、可管理、可优化
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 枚举、迭代、条件 -->
+                        <div class="card-hover bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                <div class="flex items-center lg:justify-center">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mr-4 lg:mr-0">
+                                        <i class="fas fa-sync-alt text-purple-600 text-2xl"></i>
+                                    </div>
+                                    <div class="lg:hidden">
+                                        <h4 class="text-xl font-bold text-slate-900 dark:text-white">枚举、迭代、条件</h4>
+                                        <p class="text-slate-600 dark:text-slate-300 text-sm">系统性处理复杂现实问题</p>
+                                    </div>
+                                </div>
+
+                                <div class="lg:col-span-2">
+                                    <div class="hidden lg:block mb-4">
+                                        <h4 class="text-xl font-bold text-slate-900 dark:text-white">枚举、迭代、条件 (List, Loop, Logic)</h4>
+                                        <p class="text-slate-600 dark:text-slate-300 mb-4">三者结合能够处理极其复杂的现实问题</p>
+                                    </div>
+
+                                    <div class="space-y-3">
+                                        <div class="flex items-start">
+                                            <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                                                <i class="fas fa-list text-blue-600 dark:text-blue-400 text-sm"></i>
+                                            </div>
+                                            <div>
+                                                <h5 class="font-medium text-slate-900 dark:text-white">枚举思维</h5>
+                                                <p class="text-slate-600 dark:text-slate-300 text-sm">系统性地考虑所有可能性，避免遗漏</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                                                <i class="fas fa-redo text-green-600 dark:text-green-400 text-sm"></i>
+                                            </div>
+                                            <div>
+                                                <h5 class="font-medium text-slate-900 dark:text-white">迭代思维</h5>
+                                                <p class="text-slate-600 dark:text-slate-300 text-sm">通过重复优化来接近最佳解决方案</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                                                <i class="fas fa-code-branch text-purple-600 dark:text-purple-400 text-sm"></i>
+                                            </div>
+                                            <div>
+                                                <h5 class="font-medium text-slate-900 dark:text-white">条件思维</h5>
+                                                <p class="text-slate-600 dark:text-slate-300 text-sm">根据不同情况采取不同策略</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 这些思维在AI时代的价值 -->
+                <div class="bg-gradient-to-br from-primary-50 to-purple-50 dark:from-primary-900/20 dark:to-purple-900/20 rounded-2xl p-8 border border-primary-200 dark:border-primary-700">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6 text-center">
+                        <i class="fas fa-rocket text-primary-500 mr-3"></i>
+                        这些思维在AI时代的价值
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white/60 dark:bg-slate-800/60 rounded-lg p-6 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-primary-100 to-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-handshake text-primary-600 text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-900 dark:text-white mb-2">与AI协作</h4>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">用结构化思维与AI进行更有效的沟通</p>
+                        </div>
+
+                        <div class="bg-white/60 dark:bg-slate-800/60 rounded-lg p-6 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-teal-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-search text-green-600 text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-900 dark:text-white mb-2">问题分析</h4>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">用计算机思维分析和优化工作流程</p>
+                        </div>
+
+                        <div class="bg-white/60 dark:bg-slate-800/60 rounded-lg p-6 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-red-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-lightbulb text-orange-600 text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-900 dark:text-white mb-2">創新设计</h4>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">结合传统智慧和现代工具，创造新的解决方案</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 实际项目创作 - SVG二维码分享卡片 -->
+        <section id="project" class="py-20 bg-slate-50 dark:bg-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-4">实际项目创作 - SVG二维码分享卡片</h2>
+                    <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-lg">无需Python环境，基于Web工具和AI辅助创作专业个人名片</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- 项目设计 -->
+                    <div class="space-y-8">
+                        <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-palette text-purple-600 dark:text-purple-400 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">项目设计</h3>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="bg-slate-50 dark:bg-slate-800 rounded-lg p-6">
+                                    <h4 class="font-semibold text-slate-900 dark:text-white mb-3">技术选择</h4>
+                                    <div class="space-y-2 text-slate-600 dark:text-slate-300">
+                                        <p>• <strong>SVG格式</strong>：矢量图形，可缩放，文件小</p>
+                                        <p>• <strong>Web工具</strong>：无需Python环境，基于浏览器</p>
+                                        <p>• <strong>AI辅助</strong>：智能生成和优化设计</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-slate-50 dark:bg-slate-800 rounded-lg p-6">
+                                    <h4 class="font-semibold text-slate-900 dark:text-white mb-3">成果定位</h4>
+                                    <div class="space-y-2 text-slate-600 dark:text-slate-300">
+                                        <p>• 专业个人名片设计</p>
+                                        <p>• 技能展示和学习证明</p>
+                                        <p>• 课程学习成果作品</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 技术路径 -->
+                        <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-route text-green-600 dark:text-green-400 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">技术路径</h3>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="bg-gradient-to-r from-green-50 to-teal-50 dark:from-green-900/20 dark:to-teal-900/20 rounded-lg p-4">
+                                    <h4 class="font-semibold text-green-800 dark:text-green-300 mb-2">SVG编辑的优势</h4>
+                                    <ul class="space-y-1 text-sm text-green-700 dark:text-green-400">
+                                        <li>• 可视化编辑：类似设计软件，但用代码描述</li>
+                                        <li>• AI友好：文本格式，容易被AI理解和修改</li>
+                                        <li>• 跨平台兼容：任何现代浏览器都可以显示</li>
+                                        <li>• 专业输出：可直接用于印刷或数字展示</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 无Python解决方案 -->
+                    <div class="space-y-8">
+                        <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-tools text-blue-600 dark:text-blue-400 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">无Python解决方案</h3>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-blue-500 pl-4">
+                                    <h4 class="font-semibold text-slate-900 dark:text-white mb-2">1. 二维码生成（推荐SVG格式输出工具）</h4>
+                                    <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-sm">
+                                        <li>• <a href="https://qrplanet.com/qr-code-generator-svg" target="_blank" class="text-blue-500 hover:text-blue-600"><strong>QR Planet</strong></a>：免费专业SVG输出</li>
+                                        <li>• <a href="https://aquiestoy.io/qr-code-generator/svg" target="_blank" class="text-blue-500 hover:text-blue-600"><strong>Aquiestoy</strong></a>：免费支持自定义样式</li>
+                                        <li>• <a href="https://www.tiaomama.com/qrcode-batch" target="_blank" class="text-blue-500 hover:text-blue-600"><strong>条妈妈</strong></a>：国内工具，SVG批量生成</li>
+                                    </ul>
+                                </div>
+
+                                <div class="border-l-4 border-green-500 pl-4">
+                                    <h4 class="font-semibold text-slate-900 dark:text-white mb-2">2. SVG编辑和预览</h4>
+                                    <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-sm">
+                                        <li>• AI辅助生成基础框架（Cursor）</li>
+                                        <li>• 浏览器内直接预览（.html文件包含SVG）</li>
+                                        <li>• 在线预览工具：<a href="https://onlinestool.com/svg-code-to-image" target="_blank" class="text-blue-500 hover:text-blue-600">onlinestool.com</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="border-l-4 border-purple-500 pl-4">
+                                    <h4 class="font-semibold text-slate-900 dark:text-white mb-2">3. 技术验证</h4>
+                                    <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-sm">
+                                        <li>• 所有工具均已验证可用</li>
+                                        <li>• 支持自定义颜色、样式和错误修正级别</li>
+                                        <li>• 文件小（通常<5KB），适合网络传播</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 实操流程 -->
+                        <div class="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-2xl p-6 border border-orange-200 dark:border-orange-700">
+                            <h4 class="font-bold text-orange-800 dark:text-orange-300 mb-4">
+                                <i class="fas fa-play-circle mr-2"></i>
+                                实操流程（共20分钟）
+                            </h4>
+
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                        <span class="text-white font-bold text-sm">1</span>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-medium text-orange-800 dark:text-orange-300 mb-1">设计阶段（5分钟）</h5>
+                                        <ul class="text-orange-700 dark:text-orange-400 text-sm space-y-1">
+                                            <li>• 信息收集：姓名、职位、联系方式、个人特色</li>
+                                            <li>• 风格确定：简洁专业 vs 创意个性</li>
+                                            <li>• 布局规划：信息层次和视觉重点</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                        <span class="text-white font-bold text-sm">2</span>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-medium text-orange-800 dark:text-orange-300 mb-1">AI协作生成（10分钟）</h5>
+                                        <ul class="text-orange-700 dark:text-orange-400 text-sm space-y-1">
+                                            <li>• 与AI对话设计需求：体验思考带宽增强</li>
+                                            <li>• SVG代码生成和优化：观察AI如何理解设计语言</li>
+                                            <li>• 迭代优化：在对话中不断完善设计</li>
+                                            <li>• 二维码集成：将预生成的二维码SVG元素整合</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                        <span class="text-white font-bold text-sm">3</span>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-medium text-orange-800 dark:text-orange-300 mb-1">成果验证（5分钟）</h5>
+                                        <ul class="text-orange-700 dark:text-orange-400 text-sm space-y-1">
+                                            <li>• 浏览器预览：检查显示效果</li>
+                                            <li>• 尺寸适配：确保在不同设备上的显示</li>
+                                            <li>• 输出准备：SVG文件的保存和分享</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 学习价值体现 -->
+                <div class="mt-16">
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8 text-center">学习价值体现</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="card-hover bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-brain text-blue-600 text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-2">计算机思维实践</h4>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">结构化分解设计问题</p>
+                        </div>
+
+                        <div class="card-hover bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-teal-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-handshake text-green-600 text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-2">AI协作体验</h4>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">在创作过程中的思考带宽增强</p>
+                        </div>
+
+                        <div class="card-hover bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-red-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-tools text-orange-600 text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-2">实用技能获得</h4>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">掌握一种轻量级的设计创作方法</p>
+                        </div>
+
+                        <div class="card-hover bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-infinity text-purple-600 text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-2">成果可持续性</h4>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">文件小、兼容性好、易于修改和维护</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 成果展示与未来展望 -->
+        <section id="resources" class="py-20 bg-white dark:bg-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-4">成果展示与未来展望</h2>
+                    <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-lg">学习成果总结，政务场景应用前景，课后扩展指导</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+                    <!-- 学习成果总结 -->
+                    <div class="space-y-8">
+                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-8 border border-green-200 dark:border-green-700">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-trophy text-green-600 dark:text-green-400 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">学习成果总结</h3>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-green-800 dark:text-green-300">技术能力提升</h4>
+                                        <p class="text-green-700 dark:text-green-400 text-sm">从理论学习到工具实操的完整体验</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-green-800 dark:text-green-300">思维模式转变</h4>
+                                        <p class="text-green-700 dark:text-green-400 text-sm">计算机思维在日常工作中的应用</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-green-800 dark:text-green-300">创作能力增强</h4>
+                                        <p class="text-green-700 dark:text-green-400 text-sm">AI辅助下的高效内容产出</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 政务场景应用前景 -->
+                    <div class="space-y-8">
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-700">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-building text-blue-600 dark:text-blue-400 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">政务场景应用前景</h3>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <i class="fas fa-arrow-right text-blue-500 mr-3 mt-1"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-blue-800 dark:text-blue-300">宣传材料制作效率提升</h4>
+                                        <p class="text-blue-700 dark:text-blue-400 text-sm">快速生成高质量的政务宣传内容</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <i class="fas fa-arrow-right text-blue-500 mr-3 mt-1"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-blue-800 dark:text-blue-300">公众展示平台快速搭建</h4>
+                                        <p class="text-blue-700 dark:text-blue-400 text-sm">利用现代工具提升公众服务体验</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <i class="fas fa-arrow-right text-blue-500 mr-3 mt-1"></i>
+                                    <div>
+                                        <h4 class="font-semibold text-blue-800 dark:text-blue-300">数字化转型的新思路和方法</h4>
+                                        <p class="text-blue-700 dark:text-blue-400 text-sm">AI助力政务工作流程优化</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 课后扩展与下次预告 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                    <!-- 扩展实践建议 -->
+                    <div class="bg-slate-50 dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6">
+                            <i class="fas fa-lightbulb text-primary-500 mr-3"></i>
+                            扩展实践建议
+                        </h3>
+
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-primary-500 pl-4">
+                                <h4 class="font-semibold text-slate-900 dark:text-white mb-1">深化Git使用</h4>
+                                <p class="text-slate-600 dark:text-slate-300 text-sm">学习版本控制和协作开发</p>
+                            </div>
+
+                            <div class="border-l-4 border-green-500 pl-4">
+                                <h4 class="font-semibold text-slate-900 dark:text-white mb-1">扩展AI工具链</h4>
+                                <p class="text-slate-600 dark:text-slate-300 text-sm">探索更多创作和办公工具</p>
+                            </div>
+
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h4 class="font-semibold text-slate-900 dark:text-white mb-1">计算机思维应用</h4>
+                                <p class="text-slate-600 dark:text-slate-300 text-sm">在实际工作中练习结构化思考</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 工具资源 -->
+                    <div class="bg-slate-50 dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6">
+                            <i class="fas fa-tools text-orange-500 mr-3"></i>
+                            工具资源
+                        </h3>
+
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                                    <i class="fa-brands fa-twitch text-primary-600 dark:text-primary-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-900 dark:text-white">Cursor官网</h4>
+                                    <a href="https://cursor.com" target="_blank" class="text-primary-500 hover:text-primary-600 text-sm">cursor.com</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                                    <i class="fas fa-robot text-green-600 dark:text-green-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-900 dark:text-white">Trae AI</h4>
+                                    <div class="text-sm space-y-1">
+                                        <a href="https://trae.ai" target="_blank" class="text-primary-500 hover:text-primary-600 block">trae.ai（国际版，推荐）</a>
+                                        <a href="https://trae.com.cn" target="_blank" class="text-primary-500 hover:text-primary-600 block">trae.com.cn（国内版）</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                                    <i class="fab fa-github text-orange-600 dark:text-orange-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-900 dark:text-white">GitHub学习资源</h4>
+                                    <p class="text-slate-600 dark:text-slate-300 text-sm">版本控制和协作开发指南</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-slate-900 dark:bg-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 作者信息 -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">作者信息</h4>
+                    <div class="space-y-2 text-slate-300">
+                        <p class="flex items-center">
+                            <i class="fas fa-user mr-2"></i>
+                            <strong>作者姓名：</strong>Izumi.屈源
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 社交媒体链接 -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">社交媒体</h4>
+                    <div class="space-y-3">
+                        <a href="https://github.com/OtokoNoIzumi" target="_blank" class="flex items-center text-slate-300 hover:text-white transition-colors">
+                            <i class="fab fa-github mr-3 text-xl"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://space.bilibili.com/82205" target="_blank" class="flex items-center text-slate-300 hover:text-white transition-colors">
+                            <i class="fas fa-video mr-3 text-xl"></i>
+                            <span>Bilibili</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 版权信息 -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">版权信息</h4>
+                    <div class="text-slate-300">
+                        <p>&copy; 2025 Izumi.屈源</p>
+                        <p class="text-sm mt-2">保留所有权利</p>
+                        <p class="text-sm">AI创作新模式体验</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // 检查系统偏好或存储的主题
+        const getTheme = () => {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                return 'dark';
+            }
+            return 'light';
+        };
+
+        // 应用主题
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                html.classList.add('dark');
+                localStorage.theme = 'dark';
+            } else {
+                html.classList.remove('dark');
+                localStorage.theme = 'light';
+            }
+        };
+
+        // 初始化主题
+        applyTheme(getTheme());
+
+        // 主题切换事件
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+        });
+
+        // 移动端菜单切换
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 滚动进度条
+        const progressBar = document.getElementById('progressBar');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            progressBar.style.width = scrollPercent + '%';
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+
+                    // 关闭移动端菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // 添加滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // 观察所有带有fade-in类的元素
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // 导航栏激活状态
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-primary-500');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-primary-500');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
