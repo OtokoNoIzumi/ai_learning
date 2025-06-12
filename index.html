@@ -316,6 +316,87 @@
                     <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-lg">确保技术环境就绪，验收上次课程成果</p>
                 </div>
 
+                <div class="grid grid-cols-1 gap-12 mb-12">
+                    <!-- 工具概念介绍 -->
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-700">
+                        <div class="text-center mb-8">
+                            <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-tools text-blue-600 dark:text-blue-400 text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">本节课需要的两个重要工具</h3>
+                            <p class="text-slate-600 dark:text-slate-300">让我们先了解一下即将使用的工具</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- Cursor介绍 -->
+                            <div class="bg-white dark:bg-slate-900 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fas fa-edit text-purple-600 dark:text-purple-400"></i>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-slate-900 dark:text-white">Cursor</h4>
+                                </div>
+                                <div class="space-y-3">
+                                    <p class="text-slate-600 dark:text-slate-300 text-sm">
+                                        <span class="font-medium text-purple-600 dark:text-purple-400">简单理解：</span>
+                                        像是一个带有AI助手的高级"记事本"
+                                    </p>
+                                    <p class="text-slate-600 dark:text-slate-300 text-sm">
+                                        <span class="font-medium">作用：</span>
+                                        帮助我们编写和生成网页代码，AI会协助我们完成复杂的编程工作
+                                    </p>
+                                    <div class="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-3">
+                                        <p class="text-xs text-purple-700 dark:text-purple-300">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            上节课已经安装完成，今天直接使用
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- GitHub介绍 -->
+                            <div class="bg-white dark:bg-slate-900 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fab fa-github text-green-600 dark:text-green-400"></i>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-slate-900 dark:text-white">GitHub</h4>
+                                </div>
+                                <div class="space-y-3">
+                                    <p class="text-slate-600 dark:text-slate-300 text-sm">
+                                        <span class="font-medium text-green-600 dark:text-green-400">简单理解：</span>
+                                        像是一个专门存放文件的"云盘"，并且能对文件进行版本管理
+                                    </p>
+                                    <p class="text-slate-600 dark:text-slate-300 text-sm">
+                                        <span class="font-medium">作用：</span>
+                                        不仅可以存储我们的网页代码，还能直接把网页发布到互联网上供他人访问
+                                    </p>
+                                    <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-3">
+                                        <p class="text-xs text-green-700 dark:text-green-300">
+                                            <i class="fas fa-globe mr-1"></i>
+                                            免费提供网页托管服务，让你的作品在线展示
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="mt-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg p-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-lightbulb text-blue-600 dark:text-blue-400 mr-3 mt-1"></i>
+                                <div>
+                                    <p class="font-medium text-blue-800 dark:text-blue-300 mb-1">工作流程</p>
+                                    <p class="text-blue-700 dark:text-blue-400 text-sm">
+                                        使用 <strong>Cursor</strong> 编写网页 → 通过 <strong>Git</strong> 上传到 <strong>GitHub</strong> → 网页自动发布上线
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                     <!-- 技术环境检查 -->
                     <div class="space-y-8">
@@ -324,7 +405,7 @@
                                 <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mr-4">
                                     <i class="fas fa-cog text-blue-600 dark:text-blue-400 text-xl"></i>
                                 </div>
-                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">技术环境检查与配置</h3>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">Git环境配置</h3>
                             </div>
 
                             <div class="space-y-6">
@@ -397,6 +478,10 @@ git config --global user.email "你的邮箱"
                             <div class="grid grid-cols-1 gap-2">
                                 <label class="flex items-center text-green-700 dark:text-green-400 text-sm">
                                     <input type="checkbox" class="mr-3 rounded">
+                                    Cursor编辑器已安装并能正常启动
+                                </label>
+                                <label class="flex items-center text-green-700 dark:text-green-400 text-sm">
+                                    <input type="checkbox" class="mr-3 rounded">
                                     GitHub账号注册完成并验证邮箱
                                 </label>
                                 <label class="flex items-center text-green-700 dark:text-green-400 text-sm">
@@ -405,7 +490,7 @@ git config --global user.email "你的邮箱"
                                 </label>
                                 <label class="flex items-center text-green-700 dark:text-green-400 text-sm">
                                     <input type="checkbox" class="mr-3 rounded">
-                                    测试网络环境可正常访问目标网站
+                                    网络环境可正常访问GitHub、Cursor等平台
                                 </label>
                                 <label class="flex items-center text-green-700 dark:text-green-400 text-sm">
                                     <input type="checkbox" class="mr-3 rounded">
@@ -648,6 +733,305 @@ git config --global user.email "你的邮箱"
                                         <div>
                                             <h5 class="font-medium text-slate-900 dark:text-white text-sm">学习可行性验证</h5>
                                             <p class="text-slate-600 dark:text-slate-300 text-xs">AI辅助降低学习门槛，证明掌握工作业务的可行性</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GitHub详细操作步骤 -->
+                    <div class="mt-16">
+                        <div class="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-2xl p-8 border border-green-200 dark:border-green-700">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fab fa-github text-green-600 dark:text-green-400 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">GitHub发布操作详解</h3>
+                            </div>
+
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <!-- GitHub操作四步骤 -->
+                                <div class="bg-white dark:bg-slate-900 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
+                                    <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-4">
+                                        <i class="fas fa-list-ol text-blue-600 dark:text-blue-400 mr-2"></i>
+                                        GitHub操作四步骤
+                                    </h4>
+
+                                    <div class="space-y-6">
+                                        <!-- 步骤1：创建仓库 -->
+                                        <div class="border-l-4 border-blue-500 pl-4">
+                                            <h5 class="font-semibold text-slate-900 dark:text-white mb-2">
+                                                <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded-full mr-2">1</span>
+                                                创建仓库（Repository）
+                                            </h5>
+                                            <p class="text-slate-600 dark:text-slate-300 text-sm mb-2">
+                                                仓库就像是一个文件夹，用来存放我们的网页文件
+                                            </p>
+                                            <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
+                                                <p class="text-xs text-blue-700 dark:text-blue-300">
+                                                    <strong>示例：</strong> github.com/OtokoNoIzumi/ai_learning
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <!-- 步骤2：上传文件 -->
+                                        <div class="border-l-4 border-green-500 pl-4">
+                                            <h5 class="font-semibold text-slate-900 dark:text-white mb-2">
+                                                <span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full mr-2">2</span>
+                                                上传文件到仓库
+                                            </h5>
+                                            <p class="text-slate-600 dark:text-slate-300 text-sm mb-2">
+                                                把我们用Cursor制作的网页文件上传到GitHub仓库
+                                            </p>
+                                            <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-3">
+                                                <p class="text-xs text-green-700 dark:text-green-300">
+                                                    <strong>两种方式：</strong> 网页版上传（入门推荐）或 Git客户端（进阶）
+                                                    <br>
+                                                    <strong>参考资料：</strong> <a href="https://git-scm.com/book/zh/v2" target="_blank" class="text-blue-600 hover:text-blue-700">Git官方中文教程</a> 1.6、2.1、2.2章节
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <!-- 步骤3：开启Pages -->
+                                        <div class="border-l-4 border-purple-500 pl-4">
+                                            <h5 class="font-semibold text-slate-900 dark:text-white mb-2">
+                                                <span class="bg-purple-500 text-white text-xs px-2 py-1 rounded-full mr-2">3</span>
+                                                开启GitHub Pages功能
+                                            </h5>
+                                            <p class="text-slate-600 dark:text-slate-300 text-sm mb-2">
+                                                让GitHub把我们的代码变成可以访问的网站
+                                            </p>
+                                            <div class="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-3">
+                                                <p class="text-xs text-purple-700 dark:text-purple-300">
+                                                    <strong>操作路径：</strong> Settings → Pages → Build and deployment → Branch → Save
+                                                    <br>
+                                                    <strong>等待时间：</strong> 几分钟后刷新即可访问
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <!-- 步骤4：网址解析 -->
+                                        <div class="border-l-4 border-orange-500 pl-4">
+                                            <h5 class="font-semibold text-slate-900 dark:text-white mb-2">
+                                                <span class="bg-orange-500 text-white text-xs px-2 py-1 rounded-full mr-2">4</span>
+                                                理解发布网站的网址结构
+                                            </h5>
+                                            <div class="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4 mt-2">
+                                                <div class="text-center mb-4">
+                                                    <div class="bg-slate-800 text-green-400 font-mono text-sm px-4 py-3 rounded-lg inline-block">
+                                                        otokonoizumi.github.io/ai_learning/report
+                                                    </div>
+                                                </div>
+                                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                                                    <div class="text-center">
+                                                        <div class="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-3 py-2 rounded-lg mb-2">
+                                                            <strong>otokonoizumi</strong>
+                                                        </div>
+                                                        <p class="text-slate-600 dark:text-slate-400">GitHub用户名</p>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <div class="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-3 py-2 rounded-lg mb-2">
+                                                            <strong>ai_learning</strong>
+                                                        </div>
+                                                        <p class="text-slate-600 dark:text-slate-400">仓库名称</p>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <div class="bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 px-3 py-2 rounded-lg mb-2">
+                                                            <strong>report</strong>
+                                                        </div>
+                                                        <p class="text-slate-600 dark:text-slate-400">文件路径</p>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-lg p-3">
+                                                    <p class="text-xs text-amber-700 dark:text-amber-300">
+                                                        <i class="fas fa-lightbulb mr-1"></i>
+                                                        <strong>小技巧：</strong> 如果上传的文件名是 index.html，则不需要在网址后面加文件名；对于html文件，也可以省略.html后缀
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <!-- 视频教程 -->
+                                <div class="bg-white dark:bg-slate-900 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center mr-3">
+                                            <i class="fas fa-play text-red-600 dark:text-red-400"></i>
+                                        </div>
+                                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">视频演示教程</h4>
+                                    </div>
+                                    <div class="bg-slate-100 dark:bg-slate-800 rounded-lg p-4">
+                                        <div class="aspect-video rounded-lg overflow-hidden">
+                                                                                        <iframe
+                                                src="https://player.bilibili.com/player.html?isOutside=true&aid=114672489465560&bvid=BV1acMTz5Ef8&cid=30464937173&p=1"
+                                                scrolling="no"
+                                                border="0"
+                                                frameborder="no"
+                                                framespacing="0"
+                                                allowfullscreen="true"
+                                                class="w-full h-full">
+                                            </iframe>
+                                        </div>
+                                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-2 text-center">
+                                            完整操作演示：从创建仓库到网站发布的全流程
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Git客户端进阶操作 -->
+                    <div class="mt-16">
+                        <div class="bg-gradient-to-r from-slate-50 to-gray-50 dark:from-slate-800 dark:to-gray-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-slate-100 dark:bg-slate-700 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-terminal text-slate-600 dark:text-slate-400 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">Git客户端命令行操作进阶</h3>
+                            </div>
+
+                            <p class="text-slate-600 dark:text-slate-300 mb-6">
+                                熟悉网页版操作后，可以尝试使用Git命令行工具，提升操作效率。命令行操作让你更好地理解Git的工作原理。
+                            </p>
+
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <!-- 操作步骤 -->
+                                <div class="space-y-6">
+                                    <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-4">
+                                        <i class="fas fa-list-ol text-slate-600 dark:text-slate-400 mr-2"></i>
+                                        基础操作流程
+                                    </h4>
+
+                                    <!-- 步骤1 -->
+                                    <div class="flex items-start">
+                                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                            <span class="text-white font-bold text-sm">1</span>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h5 class="font-semibold text-slate-900 dark:text-white mb-2">打开Git命令行</h5>
+                                            <p class="text-slate-600 dark:text-slate-300 text-sm mb-2">选择一个文件夹，右键菜单选择"Git Bash Here"</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- 步骤2 -->
+                                    <div class="flex items-start">
+                                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                            <span class="text-white font-bold text-sm">2</span>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h5 class="font-semibold text-slate-900 dark:text-white mb-2">克隆仓库到本地</h5>
+                                            <div class="bg-slate-800 rounded-lg p-3 text-green-400 font-mono text-sm mb-2">
+                                                git clone https://github.com/OtokoNoIzumi/ai_learning.git
+                                            </div>
+                                            <p class="text-slate-500 dark:text-slate-400 text-xs">替换成你自己创建的仓库地址</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- 步骤3 -->
+                                    <div class="flex items-start">
+                                        <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                            <span class="text-white font-bold text-sm">3</span>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h5 class="font-semibold text-slate-900 dark:text-white mb-2">添加文件到暂存区</h5>
+                                            <div class="space-y-2">
+                                                <div class="bg-slate-800 rounded-lg p-3 text-green-400 font-mono text-sm">
+                                                    git add .
+                                                </div>
+                                                <p class="text-slate-500 dark:text-slate-400 text-xs">添加所有文件，或者：</p>
+                                                <div class="bg-slate-800 rounded-lg p-3 text-green-400 font-mono text-sm">
+                                                    git add report.html
+                                                </div>
+                                                <p class="text-slate-500 dark:text-slate-400 text-xs">只添加指定文件</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 步骤4 -->
+                                    <div class="flex items-start">
+                                        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                            <span class="text-white font-bold text-sm">4</span>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h5 class="font-semibold text-slate-900 dark:text-white mb-2">提交改动</h5>
+                                            <div class="bg-slate-800 rounded-lg p-3 text-green-400 font-mono text-sm mb-2">
+                                                git commit -m "改动说明文字"
+                                            </div>
+                                            <p class="text-slate-500 dark:text-slate-400 text-xs">用简短文字描述你的修改内容</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- 步骤5 -->
+                                    <div class="flex items-start">
+                                        <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                            <span class="text-white font-bold text-sm">5</span>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h5 class="font-semibold text-slate-900 dark:text-white mb-2">推送到远程仓库</h5>
+                                            <div class="bg-slate-800 rounded-lg p-3 text-green-400 font-mono text-sm mb-2">
+                                                git push
+                                            </div>
+                                            <p class="text-slate-500 dark:text-slate-400 text-xs">将本地改动同步到GitHub</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 学习资源和提示 -->
+                                <div class="space-y-6">
+                                    <div class="bg-white dark:bg-slate-900 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
+                                        <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-4">
+                                            <i class="fas fa-book text-blue-600 dark:text-blue-400 mr-2"></i>
+                                            学习资源
+                                        </h4>
+                                        <div class="space-y-3">
+                                            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg p-4">
+                                                <p class="font-medium text-blue-800 dark:text-blue-300 text-sm mb-2">官方文档</p>
+                                                <p class="text-blue-700 dark:text-blue-400 text-sm">
+                                                    <a href="https://git-scm.com/book/zh/v2/Git-%e5%9f%ba%e7%a1%80-%e8%ae%b0%e5%bd%95%e6%af%8f%e6%ac%a1%e6%9b%b4%e6%96%b0%e5%88%b0%e4%bb%93%e5%ba%93" target="_blank" class="underline hover:text-blue-600">
+                                                        Git官方中文教程 - 记录每次更新到仓库
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-white dark:bg-slate-900 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
+                                        <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-4">
+                                            <i class="fas fa-lightbulb text-amber-600 dark:text-amber-400 mr-2"></i>
+                                            学习建议
+                                        </h4>
+                                        <div class="space-y-3 text-sm">
+                                            <div class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <p class="text-slate-600 dark:text-slate-300">先掌握网页版操作，再学习命令行</p>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <p class="text-slate-600 dark:text-slate-300">多练习基础命令，理解Git工作流程</p>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <p class="text-slate-600 dark:text-slate-300">遇到问题时查阅官方文档</p>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <p class="text-slate-600 dark:text-slate-300">用自己的项目练习，加深理解</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-lg p-4">
+                                        <div class="flex items-start">
+                                            <i class="fas fa-exclamation-triangle text-amber-600 dark:text-amber-400 mr-3 mt-1"></i>
+                                            <div>
+                                                <p class="font-medium text-amber-800 dark:text-amber-300 text-sm mb-1">温馨提示</p>
+                                                <p class="text-amber-700 dark:text-amber-400 text-sm">命令行操作更高效，但需要一定学习成本。建议循序渐进，不要急于求成。</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
